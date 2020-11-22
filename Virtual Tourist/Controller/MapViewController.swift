@@ -1,42 +1,29 @@
+
 import UIKit
 import MapKit
+import CoreData
 
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
     
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var dataController: DataController!
+    var fetchedResults: NSFetchedResultsController<Map>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        setupFetchedResultsController()
+        fetchMapLocation()
         
-        // Generate long-press UIGestureRecognizer.
+        // Generate long-press
         let myLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
         myLongPress.addTarget(self, action: #selector(recognizeLongPress(_:)))
-        
-        // Added UIGestureRecognizer to MapView.
         mapView.addGestureRecognizer(myLongPress)
-
-        let locations = hardCodedLocationData()
-
-        var annotations = [MKPointAnnotation]()
-        
-        for dictionary in locations {
-
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-            
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-
-            annotations.append(annotation)
-        }
-        self.mapView.addAnnotations(annotations)
-        
     }
+    
     
     // A method called when long press is detected.
     @objc private func recognizeLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -45,32 +32,56 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             return
         }
         
-        // Get the coordinates of the point you pressed long.
         let location = sender.location(in: mapView)
-        
-        // Convert location to CLLocationCoordinate2D.
-        let myCoordinate: CLLocationCoordinate2D = mapView.convert(location, toCoordinateFrom: mapView)
-        
-        // Generate pins.
-        let myPin: MKPointAnnotation = MKPointAnnotation()
-        
-        // Set the coordinates.
-        myPin.coordinate = myCoordinate
-        
-        // Added pins to MapView.
-        mapView.addAnnotation(myPin)
-        print("Lat: ", myCoordinate.latitude)
-        print("Lng: ", myCoordinate.longitude)
+        let coordinate: CLLocationCoordinate2D = mapView.convert(location, toCoordinateFrom: mapView)
+        let pin: MKPointAnnotation = MKPointAnnotation()
+        pin.coordinate = coordinate
+        mapView.addAnnotation(pin)
+        addNewLocation(lat: coordinate.latitude, lng: coordinate.longitude)
     }
     
-
+    func addNewLocation(lat: Double, lng: Double) {
+        print("Should save lng and lat")
+        let mapDB = Map(context: dataController.viewContext)
+        mapDB.latitude = lat
+        mapDB.longitude = lng
+        try? dataController.viewContext.save()
+    }
+    
+    func setupFetchedResultsController() {
+        let fetchRequest:NSFetchRequest<Map> = Map.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "latitude", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResults = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "mapAnnotations")
+        fetchedResults.delegate = self
+        
+        do {
+            try fetchedResults.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    fileprivate func fetchMapLocation() {
+        var annotations = [MKPointAnnotation]()
+        for coordinateObject in fetchedResults.fetchedObjects!{
+            let lat = coordinateObject.latitude
+            let lng = coordinateObject.longitude
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
+    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        
+
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
@@ -80,21 +91,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Should show album view")
     }
-
     
-    func hardCodedLocationData() -> [[String : Any]] {
-        return  [
-               [
-                "latitude" : 30.033333,
-                "longitude" : 31.233334
-            ]
-        ]
-    }
+    
 }
