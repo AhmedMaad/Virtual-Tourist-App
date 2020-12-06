@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataController.load()
         
         let mapViewController = window?.rootViewController as! MapViewController
-        //let mapViewController = navigationController.topViewController as! MapViewController
         mapViewController.dataController = dataController
         
         return true

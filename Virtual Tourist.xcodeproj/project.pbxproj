@@ -14,6 +14,8 @@
 		8D3F7E0D256A7B830058C38A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F7E0B256A7B830058C38A /* LaunchScreen.storyboard */; };
 		8D3F7E1A256AA0A60058C38A /* VirtualTouristDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F7E18256AA0A60058C38A /* VirtualTouristDB.xcdatamodeld */; };
 		8D3F7E1C256AA7430058C38A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F7E1B256AA7430058C38A /* DataController.swift */; };
+		8D3F7E1E256ADD9C0058C38A /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3F7E1D256ADD9C0058C38A /* PhotoAlbumViewController.swift */; };
+		8DB2A16A257D13E000BB9A32 /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB2A169257D13E000BB9A32 /* CollectionItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		8D3F7E0E256A7B830058C38A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D3F7E19256AA0A60058C38A /* VirtualTouristDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTouristDB.xcdatamodel; sourceTree = "<group>"; };
 		8D3F7E1B256AA7430058C38A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		8D3F7E1D256ADD9C0058C38A /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		8DB2A169257D13E000BB9A32 /* CollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				8D3F7E04256A7B810058C38A /* MapViewController.swift */,
+				8D3F7E1D256ADD9C0058C38A /* PhotoAlbumViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 			children = (
 				8D3F7E18256AA0A60058C38A /* VirtualTouristDB.xcdatamodeld */,
 				8D3F7E1B256AA7430058C38A /* DataController.swift */,
+				8DB2A169257D13E000BB9A32 /* CollectionItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,7 +181,9 @@
 			files = (
 				8D3F7E05256A7B810058C38A /* MapViewController.swift in Sources */,
 				8D3F7E1C256AA7430058C38A /* DataController.swift in Sources */,
+				8DB2A16A257D13E000BB9A32 /* CollectionItem.swift in Sources */,
 				8D3F7E03256A7B810058C38A /* AppDelegate.swift in Sources */,
+				8D3F7E1E256ADD9C0058C38A /* PhotoAlbumViewController.swift in Sources */,
 				8D3F7E1A256AA0A60058C38A /* VirtualTouristDB.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

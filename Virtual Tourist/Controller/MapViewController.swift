@@ -96,6 +96,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Should show album view")
+        //let photoController = PhotoAlbumViewController()
+        let photoController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Photo") as! PhotoAlbumViewController
+        present(photoController, animated: true, completion: nil)
     }
     
     

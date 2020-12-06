@@ -36,7 +36,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="40.799999999999997" y="25.637181409295355"/>
+            <point key="canvasLocation" x="-154" y="17"/>
+        </scene>
+        <!--Photo Album View Controller-->
+        <scene sceneID="boG-rD-W24">
+            <objects>
+                <viewController storyboardIdentifier="Photo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gPG-hr-DxZ" customClass="PhotoAlbumViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fVi-xy-5dV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jEH-My-X83">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vl8-hU-qB0">
+                                    <size key="itemSize" width="96" height="96"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CIi-Tz-OJA" customClass="CollectionItem" customModule="Virtual_Tourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TQw-1q-kp4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="TQw-1q-kp4" secondAttribute="bottom" id="9xg-Gw-7pt"/>
+                                            <constraint firstItem="TQw-1q-kp4" firstAttribute="leading" secondItem="CIi-Tz-OJA" secondAttribute="leading" id="Owt-8a-OlZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="TQw-1q-kp4" secondAttribute="trailing" id="RIP-eH-8hK"/>
+                                            <constraint firstItem="TQw-1q-kp4" firstAttribute="top" secondItem="CIi-Tz-OJA" secondAttribute="top" id="fat-9Z-8I9"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="myImage" destination="TQw-1q-kp4" id="Ico-zF-89E"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9G-8l-aoE">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ejF-wN-9Hm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="New Collection">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="loadNewCollection:" destination="gPG-hr-DxZ" eventType="touchUpInside" id="xz0-a1-9oC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g9G-8l-aoE" firstAttribute="leading" secondItem="U3y-bN-mPy" secondAttribute="leading" id="3Rm-SX-d8N"/>
+                            <constraint firstItem="jEH-My-X83" firstAttribute="top" secondItem="U3y-bN-mPy" secondAttribute="top" id="9RD-AA-GUz"/>
+                            <constraint firstItem="jEH-My-X83" firstAttribute="bottom" secondItem="U3y-bN-mPy" secondAttribute="bottom" id="BKU-c5-B7c"/>
+                            <constraint firstItem="jEH-My-X83" firstAttribute="trailing" secondItem="U3y-bN-mPy" secondAttribute="trailing" id="MRJ-jn-wo3"/>
+                            <constraint firstItem="jEH-My-X83" firstAttribute="leading" secondItem="U3y-bN-mPy" secondAttribute="leading" id="bin-ZS-SZ4"/>
+                            <constraint firstItem="g9G-8l-aoE" firstAttribute="trailing" secondItem="U3y-bN-mPy" secondAttribute="trailing" id="dkc-wP-BFF"/>
+                            <constraint firstItem="g9G-8l-aoE" firstAttribute="bottom" secondItem="U3y-bN-mPy" secondAttribute="bottom" id="wJB-da-pyI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="U3y-bN-mPy"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="jEH-My-X83" id="r1a-WQ-wNt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yPx-9U-WFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.60000000000002" y="16.641679160419791"/>
         </scene>
     </scenes>
 </document>
